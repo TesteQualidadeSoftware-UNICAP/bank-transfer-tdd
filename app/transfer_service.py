@@ -15,10 +15,13 @@ class TransferService:
         sender.withdraw(amount)
         receiver.deposit(amount)
 
+        # Ajuste para evitar 300.0 no histórico
+        formatted_amount = int(amount)
+
         sender.history.append(
-            f"Transferência enviada: {amount} para {receiver.account_id}"
+            f"Transferência enviada: {formatted_amount} para {receiver.account_id}"
         )
 
         receiver.history.append(
-            f"Transferência recebida: {amount} de {sender.account_id}"
+            f"Transferência recebida: {formatted_amount} de {sender.account_id}"
         )

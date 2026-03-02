@@ -1,226 +1,151 @@
-# 🏦 Bank Transfer TDD
-![CI](https://github.com/TesteQualidadeSoftware-UNICAP/bank-transfer-tdd/actions/workflows/ci.yml/badge.svg)
+# 🏦 Bank Transfer API
 
-Projeto educacional com padrão de mercado para simular evolução de um
-sistema bancário utilizando:
+![CI](https://github.com/SEU_USUARIO/SEU_REPO/actions/workflows/ci.yml/badge.svg)
+![Python](https://img.shields.io/badge/python-3.12-blue)
 
--   Python 3.12
--   Pytest
--   Cobertura de código (pytest-cov)
--   Integração Contínua (GitHub Actions)
--   Fluxo com Branch + Pull Request
+Projeto acadêmico demonstrando **TDD, Integração, E2E, API REST e
+CI/CD** utilizando Python e FastAPI.
 
 ------------------------------------------------------------------------
 
-# 📖 Contexto
+## 📚 Objetivo
 
-Você faz parte de um time que mantém um sistema bancário simplificado.
+Este projeto simula um sistema bancário com:
 
-Atualmente o sistema já possui:
-
+-   Criação de contas
 -   Transferência entre contas
--   Testes automatizados
--   Cobertura mínima obrigatória
--   CI configurada
-
-Sua missão é evoluir o sistema implementando uma nova funcionalidade
-seguindo boas práticas profissionais.
-
-------------------------------------------------------------------------
-
-# 💸 Funcionalidade Já Implementada
-
-## Transferência entre contas
-
-Regras implementadas:
-
--   O valor deve ser maior que zero
--   Não pode transferir para a própria conta
--   Deve haver saldo suficiente
--   Deve atualizar o saldo corretamente
--   Deve registrar histórico da operação
+-   Saque
+-   API REST com FastAPI
+-   Testes Unitários
+-   Testes End-to-End (E2E) via HTTP
+-   Linter (Ruff)
+-   Coverage mínimo obrigatório
+-   Integração Contínua (GitHub Actions)
 
 ------------------------------------------------------------------------
 
-# 🎯 Nova User Story -- Saque
+## 🏗 Arquitetura
 
-> Como cliente do banco\
-> Quero realizar um saque\
-> Para utilizar meu saldo disponível
+Estrutura principal:
 
-------------------------------------------------------------------------
+app/ - account.py - transfer_service.py - withdraw_service.py - main.py
 
-# ✅ Critérios de Aceite (BDD -- Given / When / Then)
-
-## 🟢 Cenário 1 -- Saque realizado com sucesso
-
-**Given** que o cliente possui saldo suficiente na conta\
-**When** ele solicitar um saque com valor maior que zero e dentro do
-limite disponível\
-**Then** o saldo da conta deve ser reduzido corretamente\
-**And** a operação deve ser registrada no histórico
+tests/ - test_transfer_service.py - e2e/ - test_api_e2e.py
 
 ------------------------------------------------------------------------
 
-## 🔴 Cenário 2 -- Valor inválido (zero ou negativo)
-
-**Given** que o cliente possui saldo na conta\
-**When** ele solicitar um saque com valor menor ou igual a zero\
-**Then** o sistema deve lançar uma exceção\
-**And** o saldo da conta não deve ser alterado\
-**And** nenhuma operação deve ser registrada no histórico
-
-------------------------------------------------------------------------
-
-## 🔴 Cenário 3 -- Saldo insuficiente
-
-**Given** que o cliente possui saldo menor que o valor solicitado\
-**When** ele tentar realizar o saque\
-**Then** o sistema deve lançar uma exceção\
-**And** o saldo da conta não deve ser alterado\
-**And** nenhuma operação deve ser registrada no histórico
-
-------------------------------------------------------------------------
-
-# 🧪 Requisitos Técnicos
-
-Você deve:
-
--   Criar o arquivo `withdraw_service.py`
--   Implementar a classe `WithdrawService`
--   Criar os testes unitários antes da implementação (TDD)
--   Garantir que todos os testes passem
--   Manter cobertura mínima de **90%**
--   Garantir que o CI fique verde
--   Não alterar os testes existentes da funcionalidade de transferência
-
-------------------------------------------------------------------------
-
-# 🔁 Fluxo Obrigatório (Simulação de Mercado)
-
-1.  Criar uma nova branch:
-
-``` bash
-git checkout -b feature/withdraw
-```
-
-2.  Implementar a solução
-
-3.  Fazer commit com mensagem semântica:
-
-``` bash
-git commit -m "feat: implementa serviço de saque"
-```
-
-4.  Enviar para o repositório remoto:
-
-``` bash
-git push origin feature/withdraw
-```
-
-5.  Abrir Pull Request
-
-6.  Aguardar validação automática do CI
-
-⚠️ Pull Request com CI falhando não será aceito.
-
-------------------------------------------------------------------------
-
-# 📂 Estrutura do Projeto
-
-    app/
-      account.py
-      transfer_service.py
-      withdraw_service.py (a ser criado)
-
-    tests/
-      test_transfer_service.py
-      test_withdraw_service.py (a ser criado)
-
-------------------------------------------------------------------------
-
-# 🚀 Como Executar Localmente
+## 🌐 Executando a API
 
 Instalar dependências:
 
-``` bash
 pip install -r requirements.txt
-```
 
-Rodar testes:
+Executar servidor:
 
-``` bash
+uvicorn app.main:app --reload
+
+Acessar documentação automática:
+
+http://127.0.0.1:8000/docs
+
+------------------------------------------------------------------------
+
+## 🧪 Testes
+
+### ✅ Testes Unitários
+
+pytest -m "not e2e"
+
+### 🌐 Testes E2E (via API)
+
+pytest -m e2e
+
+### 🚀 Executar todos os testes
+
 pytest
-```
 
-Rodar testes com cobertura:
+------------------------------------------------------------------------
 
-``` bash
+## 📊 Coverage
+
+Cobertura mínima configurada no CI:
+
+--cov-fail-under=90
+
+Executar localmente:
+
 pytest --cov=app --cov-report=term-missing
-```
-
-Gerar relatório HTML:
-
-``` bash
-pytest --cov=app --cov-report=html
-```
-
-Abrir:
-
-    htmlcov/index.html
 
 ------------------------------------------------------------------------
 
-# 🤖 Integração Contínua (CI)
+## 🔎 Lint
 
-O projeto possui pipeline configurado no GitHub Actions.
+Verificar qualidade do código:
 
-O CI:
+ruff check .
 
--   Executa automaticamente em push e pull request
--   Roda todos os testes
--   Verifica cobertura mínima de 90%
--   Falha se algum teste falhar
--   Falha se cobertura for inferior ao mínimo exigido
+Corrigir automaticamente:
+
+ruff check . --fix
 
 ------------------------------------------------------------------------
 
-# 📊 Critérios de Avaliação
+## 🔁 CI/CD
 
-  Critério                           Pontuação
-  ---------------------------------- -----------
-  Testes corretos e completos        2.0
-  Implementação correta das regras   2.0
-  Aplicação de TDD                   1.0
-  Organização e clareza do código    1.0
-  Cobertura mínima e CI verde        2.0
-  Uso correto de branch e commits    2.0
+Pipeline configurada com:
 
-**Total: 10 pontos**
+1.  Lint (Ruff)
+2.  Testes Unitários + Coverage
+3.  Testes E2E
 
-------------------------------------------------------------------------
+A pipeline falha se:
 
-# 🚀 Desafio (Opcional -- Diferencial)
-
-Refatore o código para evitar duplicação entre:
-
--   `TransferService`
--   `WithdrawService`
-
-Sugestões:
-
--   Avaliar extração de regras comuns
--   Melhorar organização da camada de serviços
--   Aplicar princípio da responsabilidade única (SRP)
+-   Algum teste falhar
+-   Coverage ficar abaixo de 90%
+-   O linter detectar problemas
 
 ------------------------------------------------------------------------
 
-# 🧠 Objetivo da Atividade
+## 🧠 Conceitos Aplicados
 
-Esta atividade simula um ambiente real de desenvolvimento profissional:
+-   Test-Driven Development (TDD)
+-   Testes de Integração
+-   Testes End-to-End (E2E)
+-   API REST com FastAPI
+-   Separação de responsabilidades
+-   Arquitetura em camadas
+-   Integração Contínua (CI)
+-   Qualidade de código automatizada
 
--   Evolução incremental do sistema
--   Testes automatizados como garantia de qualidade
--   Integração contínua
--   Uso de branches e Pull Requests
--   Validação automática de cobertura
+------------------------------------------------------------------------
+
+## 📦 Requisitos
+
+-   Python 3.12
+-   FastAPI
+-   Uvicorn
+-   Pytest
+-   Pytest-cov
+-   Ruff
+
+Instalar dependências:
+
+pip install -r requirements.txt
+
+------------------------------------------------------------------------
+
+## 👩‍🏫 Contexto Acadêmico
+
+Projeto utilizado para ensino de:
+
+-   Engenharia de Software
+-   Testes automatizados
+-   Versionamento com Git
+-   Boas práticas de desenvolvimento
+-   CI/CD
+
+------------------------------------------------------------------------
+
+## 📄 Licença
+
+Uso acadêmico.
