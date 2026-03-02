@@ -1,15 +1,13 @@
-# bank-transfer-tdd
-![CI](https://github.com/SEU_USUARIO/bank-transfer-tdd/actions/workflows/ci.yml/badge.svg)
-
 # 🏦 Bank Transfer TDD
+![CI](https://github.com/TesteQualidadeSoftware-UNICAP/bank-transfer-tdd/actions/workflows/ci.yml/badge.svg)
 
 Projeto educacional com padrão de mercado para simular evolução de um
 sistema bancário utilizando:
 
--   Python 3.12\
--   Pytest\
--   Cobertura de código (pytest-cov)\
--   Integração Contínua (GitHub Actions)\
+-   Python 3.12
+-   Pytest
+-   Cobertura de código (pytest-cov)
+-   Integração Contínua (GitHub Actions)
 -   Fluxo com Branch + Pull Request
 
 ------------------------------------------------------------------------
