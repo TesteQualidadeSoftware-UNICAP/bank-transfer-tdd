@@ -2,7 +2,6 @@ from app.account import Account
 
 
 class WithdrawService:
-
     @staticmethod
     def withdraw(account: Account, amount: float):
 

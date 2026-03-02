@@ -2,7 +2,6 @@ from app.account import Account
 
 
 class TransferService:
-
     @staticmethod
     def transfer(sender: Account, receiver: Account, amount: float):
 
